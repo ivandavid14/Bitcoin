@@ -1,4 +1,4 @@
-module k_lut( input wire  [5:0] address, output wire [31 : 0] k );
+module k_lut( input wire  [5:0] addr, output wire [31 : 0] k );
 	reg [31 : 0] temp;
 	assign K = temp;
 
