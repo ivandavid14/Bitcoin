@@ -30,4 +30,53 @@ module SHA256(CLK, nreset, msg, length, hash);
 	end
 
 	k_lut lookup_table(k, k_lut_addr);
+
+	function [31:0] rotate (input [31:0] data, input [4:0] shift);
+		reg [63:0] temp;
+		begin
+		  temp = {data, data} >> shift;
+		  rotate = tmp[31:0];
+		end
+	endfunction
+
+	function [31 : 0] Ch;
+		input [31 : 0] x,y,z;
+		Ch = (x & y) ^ (~x & z);
+	endfunction
+
+	function [31 : 0] Maj;
+		input [31 : 0] x,y,z;
+		Maj = (x & y) ^ (x & z) ^ (y & z);
+	endfunction
+
+	function [31 : 0] Sigma0;
+		input [31 : 0] x;
+		Sigma0 = rotate(x, 2) ^ rotate(x, 13) ^ rotate(x, 22);
+	endfunction
+	
+	function [31 : 0] Sigma1;
+		input [31 : 0] x;
+		Sigma1 = rotate(x, 6) ^ rotate(x, 11) ^ rotate(x, 25);
+	endfunction
+	
+	function [31 : 0] Delta0;
+		input [31 : 0] x;
+		Delta0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >> 3);
+	endfunction
+
+	function [31 : 0] Delta1;
+		input [31 : 0] x;
+		Delta1 = rotate(x, 17) ^ rotate(x, 19) ^ (x >> 10);
+	endfunction	
+
+	function [31 : 0] T1;
+		input [31 : 0] e, f, g, h, k, w;
+		T1 = (h + Sigma1(e) + Ch(e, f, g) + k + w);
+	endfunction
+
+	function [31 : 0] T2;
+		input [31 : 0] e, f, g, h, k, w;
+		T2 = (Sigma0(a) + Maj(a, b, c));
+	endfunction
+	
 endmodule
