@@ -5,27 +5,32 @@ module SHA256(CLK, nreset, msg, length, hash);
 	input CLK, nreset, length;
 	input [511:0] msg;
 	output reg [255:0] hash;
+	
+	reg [511:0] test_msg;
 
 	reg [31:0] H [0:7];
 	reg [31:0] W [0:15];
-	wire [31:0] w;
-	reg [31:0] a,b,c,d,e,f,g,h;
+	reg [31:0] a,b,c,d,e,f,g,h,t1,t2,w;
 
 	wire [31:0] k;
 	reg [5:0] k_addr;
 	reg [6:0] round;
+	reg [3:0] i;
 
 	k_lut lookup_table(k_addr, k);
 
 	reg [6:0] state;
 
 	localparam
-	INI  		= 	7'b0000001,
-	COMPRESSION  = 	7'b0000010,
-	UPDATE 		= 	7'b0000100,
-	IDLE 		= 	7'b0001000,
-	DONE 		= 	7'b1000000;
-
+	INI  		= 	7'd0,
+	UPDATE_W 	= 	7'd1,
+	UPDATE_K 	= 	7'd2,
+	COMPRESSION_1= 	7'd3,
+	COMPRESSION_2= 	7'd4,
+	UPDATE 		= 	7'd5,
+	DONE 		= 	7'd6,
+	IDLE	 	= 	7'd7;
+	
 	always @(posedge CLK, negedge nreset)
 	begin: CU
 		if (~nreset)
@@ -41,7 +46,8 @@ module SHA256(CLK, nreset, msg, length, hash);
 			H[7] <= 32'h5be0cd19;
 			k_addr <= 6'b0;
 			round <= 0;
-		end
+	
+			end
 		else
 		begin
 			case (state)
@@ -56,25 +62,57 @@ module SHA256(CLK, nreset, msg, length, hash);
 					g <= H[6];
 					h <= H[7];
 					
-					for (i=0; i<=15; i=i+1)
-						W[i] <= msg[ 31 + 32*i : 0 + 32*i ];
+					//for (i=0; i<=15; i=i+1)
+					W[15] <= msg[ 31 + 32*0 : 0 + 32*0 ];
+					W[14] <= msg[ 31 + 32*1 : 0 + 32*1 ];
+					W[13] <= msg[ 31 + 32*2 : 0 + 32*2 ];
+					W[12] <= msg[ 31 + 32*3 : 0 + 32*3 ];
 					
-					state <= COMPRESSION;
+					W[11] <= msg[ 31 + 32*4 : 0 + 32*4 ];
+					W[10] <= msg[ 31 + 32*5 : 0 + 32*5 ];
+					W[9] <= msg[ 31 + 32*6 : 0 + 32*6 ];
+					W[8] <= msg[ 31 + 32*7 : 0 + 32*7 ];
+					
+					W[7] <= msg[ 31 + 32*8 : 0 + 32*8 ];
+					W[6] <= msg[ 31 + 32*9 : 0 + 32*9 ];
+					W[5] <= msg[ 31 + 32*10 : 0 + 32*10 ];
+					W[4] <= msg[ 31 + 32*11 : 0 + 32*11 ];
+					
+					W[3] <= msg[ 31 + 32*12 : 0 + 32*12 ];
+					W[2] <= msg[ 31 + 32*13 : 0 + 32*13 ];
+					W[1] <= msg[ 31 + 32*14 : 0 + 32*14 ];
+					W[0] <= msg[ 31 + 32*15 : 0 + 32*15 ];
+					
+					state <= UPDATE_W;
 				end
-				COMPRESSION:
+				UPDATE_W:
 				begin
 					if (round < 16)
-						w = W[round];
+						w <= W[round];
 					else begin
-						w = (delta1(W[14]) + W[9] + delta0(W[1]) + W[0]);
+						w <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
 						for (i=0; i<=14; i=i+1)
 							W[i] <= W[(i+1)];
-						W[15] <= w;
-					end				
+						W[15] <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
+					end
+					state <= UPDATE_K;
+				end
 				
+				UPDATE_K:
+				begin
 					k_addr = round;
+					state <= COMPRESSION_1;
+				end
+				
+				COMPRESSION_1:
+				begin
 					t1 <= T1(e, f, g, h, k, w);
 					t2 <= T2(a, b, c);
+					state <= COMPRESSION_2;
+				end
+				
+				COMPRESSION_2:
+				begin
 					h <= g;
 					g <= f;
 					f <= e;
@@ -84,11 +122,12 @@ module SHA256(CLK, nreset, msg, length, hash);
 					b <= a;
 					a <= (t1 + t2);
 
-					round <= round + 1;
 					
-					if( round <= 63)
-						state <= COMPRESSION;
-					else
+					
+					if( round < 63) begin
+						state <= UPDATE_W;
+						round <= round + 1;
+					end else
 						state <= UPDATE;
 				end
 				UPDATE:
@@ -106,8 +145,16 @@ module SHA256(CLK, nreset, msg, length, hash);
 				end
 				DONE:
 				begin
-					for (i=0; i<=7; i=i+1)
-						hash[ 31 + 32*i : 0 + 32*i ] <= H[i];
+					//for (i=0; i<=7; i=i+1)
+					hash[ 31 + 32*0 : 0 + 32*0 ] <= H[7];
+					hash[ 31 + 32*1 : 0 + 32*1 ] <= H[6];
+					hash[ 31 + 32*2 : 0 + 32*2 ] <= H[5];
+					hash[ 31 + 32*3 : 0 + 32*3 ] <= H[4];
+					
+					hash[ 31 + 32*4 : 0 + 32*4 ] <= H[3];
+					hash[ 31 + 32*5 : 0 + 32*5 ] <= H[2];
+					hash[ 31 + 32*6 : 0 + 32*6 ] <= H[1];
+					hash[ 31 + 32*7 : 0 + 32*7 ] <= H[0];
 					
 					state <= IDLE;
 				end
@@ -119,7 +166,7 @@ module SHA256(CLK, nreset, msg, length, hash);
 		reg [63:0] temp;
 		begin
 		  temp = {data, data} >> shift;
-		  rotate = tmp[31:0];
+		  rotate = temp[31:0];
 		end
 	endfunction
 
@@ -159,7 +206,7 @@ module SHA256(CLK, nreset, msg, length, hash);
 	endfunction
 
 	function [31 : 0] T2;
-		input [31 : 0] e, f, g, h, k, w;
+		input [31 : 0] a, b, c;
 		T2 = (Sigma0(a) + Maj(a, b, c));
 	endfunction
 

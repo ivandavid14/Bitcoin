@@ -1,6 +1,6 @@
 module k_lut( input wire  [5:0] addr, output wire [31 : 0] k );
 	reg [31 : 0] temp;
-	assign K = temp;
+	assign k = temp;
 
 	always @(*)
 	begin
@@ -69,6 +69,7 @@ module k_lut( input wire  [5:0] addr, output wire [31 : 0] k );
 			61: temp = 32'ha4506ceb;
 			62: temp = 32'hbef9a3f7;
 			63: temp = 32'hc67178f2;
+			default: temp = 32'd0;
 		endcase
 	end
 endmodule
