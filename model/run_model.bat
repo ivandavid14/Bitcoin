@@ -1,2 +1,2 @@
-perl model.pl -fileh "input.txt"
+perl model.pl -file "input.txt"
 pause
