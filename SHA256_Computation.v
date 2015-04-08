@@ -1,12 +1,11 @@
 `include "k_lut.v"
 
-module SHA256(CLK, nreset, msg, length, hash);
-	//assume for now length < 512
-	input CLK, nreset, length;
+module SHA256(CLK, nreset, msg, blk_type, hash, blk_done);
+	input CLK, nreset;
+	input [1:0] blk_type;
 	input [511:0] msg;
 	output reg [255:0] hash;
-	
-	reg [511:0] test_msg;
+	output reg blk_done;
 
 	reg [31:0] H [0:7];
 	reg [31:0] W [0:15];
@@ -15,12 +14,18 @@ module SHA256(CLK, nreset, msg, length, hash);
 	wire [31:0] k;
 	reg [5:0] k_addr;
 	reg [6:0] round;
-	reg [3:0] i;
+	reg [3:0] i, j;
+	reg blknum;
 
 	k_lut lookup_table(k_addr, k);
 
 	reg [6:0] state;
 
+	localparam
+	HASH  		= 	7'd0,
+	MERKLE_LEAF  = 	7'd1,
+	HEADER 	= 	7'd2;
+	
 	localparam
 	INI  		= 	7'd0,
 	UPDATE_W 	= 	7'd1,
@@ -46,13 +51,16 @@ module SHA256(CLK, nreset, msg, length, hash);
 			H[7] <= 32'h5be0cd19;
 			k_addr <= 6'b0;
 			round <= 0;
-	
+			blknum <= 0;
+			blk_done <= 0;			
 			end
 		else
 		begin
 			case (state)
 				INI:
 				begin
+					blk_done <= 0;
+					round <= 0;
 					a <= H[0];
 					b <= H[1];
 					c <= H[2];
@@ -62,26 +70,28 @@ module SHA256(CLK, nreset, msg, length, hash);
 					g <= H[6];
 					h <= H[7];
 					
-					//for (i=0; i<=15; i=i+1)
-					W[15] <= msg[ 31 + 32*0 : 0 + 32*0 ];
-					W[14] <= msg[ 31 + 32*1 : 0 + 32*1 ];
-					W[13] <= msg[ 31 + 32*2 : 0 + 32*2 ];
-					W[12] <= msg[ 31 + 32*3 : 0 + 32*3 ];
+					//for (j=0; j<=15; j=j+1)
+					//	W[j] <= msg[ 31 + 32*j : 32*j ];
 					
-					W[11] <= msg[ 31 + 32*4 : 0 + 32*4 ];
-					W[10] <= msg[ 31 + 32*5 : 0 + 32*5 ];
-					W[9] <= msg[ 31 + 32*6 : 0 + 32*6 ];
-					W[8] <= msg[ 31 + 32*7 : 0 + 32*7 ];
+					W[15] <= msg[ 31 + 32*0 : 32*0 ];
+					W[14] <= msg[ 31 + 32*1 : 32*1 ];
+					W[13] <= msg[ 31 + 32*2 : 32*2 ];
+					W[12] <= msg[ 31 + 32*3 : 32*3 ];
 					
-					W[7] <= msg[ 31 + 32*8 : 0 + 32*8 ];
-					W[6] <= msg[ 31 + 32*9 : 0 + 32*9 ];
-					W[5] <= msg[ 31 + 32*10 : 0 + 32*10 ];
-					W[4] <= msg[ 31 + 32*11 : 0 + 32*11 ];
+					W[11] <= msg[ 31 + 32*4 : 32*4 ];
+					W[10] <= msg[ 31 + 32*5 : 32*5 ];
+					W[9] <= msg[ 31 + 32*6 : 32*6 ];
+					W[8] <= msg[ 31 + 32*7 : 32*7 ];
 					
-					W[3] <= msg[ 31 + 32*12 : 0 + 32*12 ];
-					W[2] <= msg[ 31 + 32*13 : 0 + 32*13 ];
-					W[1] <= msg[ 31 + 32*14 : 0 + 32*14 ];
-					W[0] <= msg[ 31 + 32*15 : 0 + 32*15 ];
+					W[7] <= msg[ 31 + 32*8 : 32*8 ];
+					W[6] <= msg[ 31 + 32*9 : 32*9 ];
+					W[5] <= msg[ 31 + 32*10 : 32*10 ];
+					W[4] <= msg[ 31 + 32*11 : 32*11 ];
+					
+					W[3] <= msg[ 31 + 32*12 : 32*12 ];
+					W[2] <= msg[ 31 + 32*13 : 32*13 ];
+					W[1] <= msg[ 31 + 32*14 : 32*14 ];
+					W[0] <= msg[ 31 + 32*15 : 32*15 ];
 					
 					state <= UPDATE_W;
 				end
@@ -146,17 +156,24 @@ module SHA256(CLK, nreset, msg, length, hash);
 				DONE:
 				begin
 					//for (i=0; i<=7; i=i+1)
-					hash[ 31 + 32*0 : 0 + 32*0 ] <= H[7];
-					hash[ 31 + 32*1 : 0 + 32*1 ] <= H[6];
-					hash[ 31 + 32*2 : 0 + 32*2 ] <= H[5];
-					hash[ 31 + 32*3 : 0 + 32*3 ] <= H[4];
+					hash[ 31 + 32*0 : 32*0 ] <= H[7];
+					hash[ 31 + 32*1 : 32*1 ] <= H[6];
+					hash[ 31 + 32*2 : 32*2 ] <= H[5];
+					hash[ 31 + 32*3 : 32*3 ] <= H[4];
 					
-					hash[ 31 + 32*4 : 0 + 32*4 ] <= H[3];
-					hash[ 31 + 32*5 : 0 + 32*5 ] <= H[2];
-					hash[ 31 + 32*6 : 0 + 32*6 ] <= H[1];
-					hash[ 31 + 32*7 : 0 + 32*7 ] <= H[0];
+					hash[ 31 + 32*4 : 32*4 ] <= H[3];
+					hash[ 31 + 32*5 : 32*5 ] <= H[2];
+					hash[ 31 + 32*6 : 32*6 ] <= H[1];
+					hash[ 31 + 32*7 : 32*7 ] <= H[0];
 					
-					state <= IDLE;
+					blk_done <= 1;
+					
+					if( ((blk_type == MERKLE_LEAF) | (blk_type == HEADER)) & (blknum == 0)) begin
+						state <= INI;
+						blknum <= 1;
+					end
+					else
+						state <= IDLE;
 				end
 		endcase
 		end

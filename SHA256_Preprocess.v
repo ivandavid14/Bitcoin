@@ -1,9 +1,7 @@
-module Preprocess(CLK, nreset, msg, length, new_msg, done);
-	input CLK, nreset;
-	input [63:0] length;
-	input [2047:0] msg;
-	output reg [2047:0] new_msg;
-	output done;
+module Preprocess(msg_type, proc_msg);
+	input [127:0] msg;
+	input msg_type;
+	output reg [511:0] proc_msg;
 
 	reg [1:0] state;
 	reg [8:0] k,n;
@@ -15,7 +13,12 @@ module Preprocess(CLK, nreset, msg, length, new_msg, done);
 	
 	assign done = state == DONE;
 	
+	// hash.1.191z.length
+	// header.1.319z.length
+	// merkle.1.447z.length
 	/*
+	 * header = 640 bits
+	 * merkle leaf 512 bits 
 	length of message = l
 	append bit '1' to message
 
