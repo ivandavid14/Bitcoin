@@ -18,8 +18,9 @@ module SHA256_tb;
 		MERKLE_LEAF  = 	7'd1,
 		HEADER 	= 	7'd2;
 
-	SHA256 UUT(.CLK(Clk_tb), .nreset(Rstb_tb), .msg(msg_tb_512), .hash(hash_tb), .blk_done(blk_done_tb), .blk_type(blk_type_tb));
-		 
+	//SHA256 UUT(.CLK(Clk_tb), .nreset(Rstb_tb), .msg(msg_tb_512), .hash(hash_tb), .blk_done(blk_done_tb), .blk_type(blk_type_tb));
+	processing_element UUT1(.CLK(Clk_tb), .nreset(Rstb_tb));
+	
 	initial
 	begin  : CLK_GENERATOR
 		Clk_tb = 0;
@@ -49,7 +50,7 @@ module SHA256_tb;
 		//msg_tb_512 <= {256'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{191{1'b0}},64'h100};
 		
 		//input header
-		blk_type_tb <= HEADER;
+		/*blk_type_tb <= HEADER;
 		msg_tb_1024 <= {640'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361b4ad1fee05e68c1093ba7b07328e1361,1'b1,{319{1'b0}},64'h280};
 		@(posedge Clk_tb);
 		msg_tb_512 <= msg_tb_1024[1023:512];
@@ -61,6 +62,7 @@ module SHA256_tb;
 		//input merkle leaf
 		blk_type_tb <= MERKLE_LEAF;
 		msg_tb_1024 <= {512'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{447{1'b0}},64'h200};
+		*/
 	end
 
 endmodule  
