@@ -47,10 +47,10 @@ module SHA256_tb;
 		//input hash
 		//msg_tb_512 <= {256'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{191{1'b0}},64'h100};
 		//msg_tb_512 <= {256'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{191{1'b0}},64'h100};
-	
-		//input merkle leaf
-		blk_type_tb <= MERKLE_LEAF;
-		msg_tb_1024 <= {512'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{447{1'b0}},64'h200};
+		
+		//input header
+		blk_type_tb <= HEADER;
+		msg_tb_1024 <= {640'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361b4ad1fee05e68c1093ba7b07328e1361,1'b1,{319{1'b0}},64'h280};
 		@(posedge Clk_tb);
 		msg_tb_512 <= msg_tb_1024[1023:512];
 		@(posedge blk_done_tb);
@@ -58,8 +58,9 @@ module SHA256_tb;
 		@(posedge blk_done_tb);
 		$stop;
 	
-		//input header
-		//msg_tb_1024 <= {512'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{319{1'b0}},64'h280};
+		//input merkle leaf
+		blk_type_tb <= MERKLE_LEAF;
+		msg_tb_1024 <= {512'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361,1'b1,{447{1'b0}},64'h200};
 	end
 
 endmodule  
