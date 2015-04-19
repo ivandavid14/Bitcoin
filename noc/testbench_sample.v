@@ -107,19 +107,23 @@ module CONNECT_testbench_sample();
     #(HalfClkPeriod);
 
     // send a 2-flit packet from send port 0 to receive port 1
-    send_flit[0] = 1'b1;
-    dest = 1;
-    vc = 0;
-    data = 'ha;
-    flit_in[0] = {1'b1 /*valid*/, 1'b0 /*tail*/, dest, vc, data};
-    $display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
+	if(credit_counter[0] > 1) begin
+		send_flit[0] = 1'b1;
+		dest = 1;
+		vc = 0;
+		data = 'ha;
+		flit_in[0] = {1'b1 /*valid*/, 1'b0 /*tail*/, dest, vc, data};
+		$display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
+	end
 
     #(ClkPeriod);
     // send 2nd flit of packet
-    send_flit[0] = 1'b1;
-    data = 'hb;
-    flit_in[0] = {1'b1 /*valid*/, 1'b1 /*tail*/, dest, vc, data};
-    $display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
+	if(credit_counter[0] > 1) begin
+		send_flit[0] = 1'b1;
+		data = 'hb;
+		flit_in[0] = {1'b1 /*valid*/, 1'b1 /*tail*/, dest, vc, data};
+		$display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
+	end
 
     #(ClkPeriod);
     // stop sending flits
