@@ -39,7 +39,7 @@
 `define NUM_VCS 4
 `define ALLOC_TYPE SepIFStatic
 `define USE_VIRTUAL_LINKS False
-`define FLIT_BUFFER_DEPTH 8
+`define FLIT_BUFFER_DEPTH 16
 `define FLIT_DATA_WIDTH 64
 `define NUM_LINKS 80
 `define NETWORK_CUT 0
