@@ -86,7 +86,7 @@ module CONNECT_testbench_sample();
   // Counter
   localparam counter_bits = $clog2(`FLIT_BUFFER_DEPTH) + 1;
   // 0 <= counter[vc] <= 16 
-  reg [counter_bits - 1 : 0] credit_counter;
+  reg [counter_bits - 1 : 0] credit_counter [0:`NUM_USER_RECV_PORTS-1];
   
   // Generate Clock
   initial Clk = 0;
@@ -98,7 +98,7 @@ module CONNECT_testbench_sample();
     for(i = 0; i < `NUM_USER_SEND_PORTS; i = i + 1) begin flit_in[i] = 0; send_flit[i] = 0; end
     for(i = 0; i < `NUM_USER_RECV_PORTS; i = i + 1) begin credit_in[i] = 0; send_credit[i] = 0; end
 	
-	for(i = 0; i < `NUM_VCS; i = i + 1) begin credit_counter[i] = `FLIT_BUFFER_DEPTH; end
+	for(i = 0; i < `NUM_USER_RECV_PORTS; i = i + 1) begin credit_counter[i] = `FLIT_BUFFER_DEPTH; end
 
     $display("---- Performing Reset ----");
     Rst_n = 0; // perform reset (active low)
@@ -143,32 +143,29 @@ module CONNECT_testbench_sample();
     end
   end
 
-  // Add your code to handle flow control here (sending receiving credits)
-  
+	// Add your code to handle flow control here (sending receiving credits)
   always @ (posedge Clk) begin
-	// Increment counter after read
+	// Increment counter after flit leaves router
     for(i = 0; i < `NUM_USER_RECV_PORTS; i = i + 1) begin
-      if(credit_out[i][credit_port_width-1]) begin // valid flit
-        //$display("@%3d: Increment counter: vc = %0d", cycle, credit_out[i][vc_bits-1:0]);
-		if(credit_counter[i]<16)
-			credit_counter <= credit_counter[i] + 1;
-      end
+      if(credit_out[i][credit_port_width-1]) begin // Valid credit
+		send_credit[i] <= 1'b1;
+		credit_in[i] <= 3'b100;
+		if(credit_counter[i] < 16)
+			credit_counter[i] <= credit_counter[i] + 1; // Only using vc 0
+      end else begin
+		  send_credit[i] <= 0;
+		  credit_in[i] <= 0;
+	  end
     end
-	
+  
 	// Decrement counter after send
     for(i = 0; i < `NUM_USER_SEND_PORTS; i = i + 1) begin
       if(send_flit[i] == 1'b1) begin // valid flit
-		  if(flit_in[i][flit_port_width-1]) begin // valid flit
-			credit_counter <= credit_counter - 1;
-			//if(counter[ flit_in[i][flit_port_width-(2+dest_bits+1) : flit_port_width-(2+dest_bits+vc_bits)] ] > 0)
-			//counter[ flit_in[i][flit_port_width-(2+dest_bits+1) : flit_port_width-(2+dest_bits+vc_bits)] ] = counter[ flit_in[i][flit_port_width-(2+dest_bits+1) : flit_port_width-(2+dest_bits+vc_bits)] ] - 1;
-			//$display("@%3d: Decrement counter: vc = %0d", cycle, flit_in[i][flit_port_width-(2+dest_bits+1) : flit_port_width-(2+dest_bits+vc_bits)]);
-			//$display("%0d - %0d",flit_port_width-(2+dest_bits+1),flit_port_width-(2+dest_bits+vc_bits));
-		  end
+		if(credit_counter[i] > 0)
+			credit_counter[i] <= credit_counter[i] - 1;
       end
     end
-  end
-  
+  end 
   
   
   // Instantiate CONNECT network
@@ -314,7 +311,7 @@ module CONNECT_testbench_sample();
    ,.recv_ports_0_putCredits_cr_in(credit_in[0])
    ,.EN_recv_ports_0_putCredits(send_credit[0])
 
-   ,.EN_recv_ports_1_getFlit(1'b0)
+   ,.EN_recv_ports_1_getFlit(1'b1)
    ,.recv_ports_1_getFlit(flit_out[1])
    ,.recv_ports_1_putCredits_cr_in(credit_in[1])
    ,.EN_recv_ports_1_putCredits(send_credit[1])
