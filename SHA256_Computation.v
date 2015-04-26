@@ -172,6 +172,7 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                 end
                 IDLE:
                 begin
+					blk_done <= 0;
                     if (start)
                     begin
                         state <= INI;
@@ -186,7 +187,6 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                         k_addr <= 6'b0;
                         round <= 0;
                         blknum <= 2'b00;
-                        blk_done <= 0;
                     end
                 end
         endcase

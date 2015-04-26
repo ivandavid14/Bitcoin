@@ -27,10 +27,9 @@ wire [2:0] slow_bits;
 wire [2:0] sev_seg_clk;
 reg [27:0] divclk;
 
-BUFGP BUFGP1 (board_clk, clk_in);
 assign reset = BTNC_in;
 
-always @(posedge board_clk, posedge reset)
+always @(posedge clk_in, posedge reset)
 begin
 	if (reset)
 		divclk <= 0;
@@ -53,6 +52,8 @@ reg [7:0] walking_leds;
 //assign LED_proc[7:0] = button_pressed ? {BTNL, BTNL, BTNU, BTNU, BTND, BTND, BTNR, BTNR} : ( divclk[27] ? 8'b11111111 : walking_leds );
 assign LED_proc[7:0] = divclk[27] ? 8'b11111111 : walking_leds;
 
+reg [31:0] Word_slow;
+
 always @ (slow_bits)
 begin
 	case (slow_bits)
@@ -66,6 +67,7 @@ begin
 		3'b111: walking_leds = 8'b10000000 ;
 		default:walking_leds = 8'bXXXXXXXX ;
 	endcase
+	Word_slow <= Word;
 end
 
 
@@ -84,7 +86,7 @@ assign AN_proc[7] = sev_seg_clk != 3'd7;
 
 // localparam word = 32'habcd_ef45;
 
-assign {SSD7, SSD6, SSD5, SSD4, SSD3, SSD2, SSD1, SSD0} = Word;
+assign {SSD7, SSD6, SSD5, SSD4, SSD3, SSD2, SSD1, SSD0} = Word_slow;
 /*
 assign SSD0 = SW[3:0];
 assign SSD1 = SW[7:4];
