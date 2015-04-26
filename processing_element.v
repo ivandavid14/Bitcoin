@@ -1,5 +1,10 @@
-module processing_element(CLK, nreset);
-    input CLK, nreset;
+module processing_element(sys_clk, BTNC, LED, CATHODE, AN); //, found_nonce);
+    input sys_clk, BTNC;
+	//output reg found_nonce;
+	output [15:0] LED;
+	output [7:0] CATHODE;
+	output [7:0] AN;
+	reg found_nonce;
     
     reg [1023:0] buffer;
     wire [255:0] hash_out;
@@ -7,10 +12,22 @@ module processing_element(CLK, nreset);
     reg [1:0] blk_type;
     wire blk_done;
     reg start;
+	reg [31:0] nonce;
     
     reg [3:0] state;
     reg blk_iteration;
-    
+	
+	//wire reset;
+	//assign reset = BTNC;
+    reg reset;
+	initial begin
+		reset <= 1'b0;
+		#10 reset <= 1'b1;
+		#10 reset <= 1'b0;
+	end
+	
+	always #5 sys_clk = ~sys_clk;
+	
     localparam
     INIT =                 4'b0000,
     PREPROCESS =           4'b0001,
@@ -24,15 +41,21 @@ module processing_element(CLK, nreset);
     HASH =         2'b00,
     MERKLE_LEAF =  2'b01,
     HEADER =       2'b10;
+	
+	localparam testheader = 640'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361b4ad1fee05e68c1093ba7b07328e0000;
     
-    always @(posedge CLK or negedge nreset)
+	localparam dononce = 1'b1;
+	
+    always @(posedge sys_clk or posedge reset)
         begin
-            if (!nreset)
+            if (reset)
                 begin
                     blk_type <= 2'b11;
                     state <= INIT;
                     blk_iteration <= 1'b0;
                     start <= 1'b0;
+					nonce <= 32'd0;
+					found_nonce <= 1'b0;
                 end
             else
                 begin
@@ -40,8 +63,8 @@ module processing_element(CLK, nreset);
                         begin
                             start <= 1'b0;
                             blk_iteration <= 1'b0;
-                            buffer <= {512'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361};
-                            blk_type <= MERKLE_LEAF;
+                            buffer <= testheader;
+                            blk_type <= HEADER;
                             
                             state <= PREPROCESS;
                         end
@@ -53,7 +76,7 @@ module processing_element(CLK, nreset);
                                   end
                               else if (blk_type == HEADER)
                                   begin
-                                      buffer <= {buffer[639:0], 1'b1, {319{1'b0}}, 64'h280};  
+                                      buffer <= {buffer[639:4], nonce, 1'b1, {319{1'b0}}, 64'h280};  
                                   end
                               state <= INPUT_FIRST_BLOCK;                               
                          end
@@ -88,7 +111,18 @@ module processing_element(CLK, nreset);
                              start <= 1'b0;
                              if (blk_done)
                                  begin
-                                     state <= DONE;
+									if(dononce) begin
+										if(hash_out[255:250] == 6'd0) begin
+											found_nonce <= 1'b1;
+											state <= DONE;
+										end
+										else begin
+											nonce <= nonce + 1'b1;
+											state <= INIT;
+										end
+									end										
+									else
+										state <= DONE;
                                  end
                          end
                      else if (state == DONE)
@@ -97,6 +131,13 @@ module processing_element(CLK, nreset);
                          end
                 end
         end
-    SHA256 UUT(.CLK(CLK), .nreset(nreset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
-
+    SHA256 UUT(.CLK(sys_clk), .nreset(~reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
+	
+	assign LED[15] = found_nonce;
+	//assign LED[14:8] = 1'b0;
+	wire [7:0] LED_walk;
+	assign LED[7:0] = LED_walk;
+	
+	nexys4_display d1(.clk_in(sys_clk), .LED_proc(LED_walk), .CATHODE_proc(CATHODE), .AN_proc(AN), .Word(nonce),
+	.BTNC_in(BTNC));
 endmodule

@@ -53,8 +53,8 @@ module CONNECT_testbench_sample();
   localparam ClkPeriod = 2*HalfClkPeriod;
 
   // non-VC routers still reeserve 1 dummy bit for VC.
-  localparam vc_bits = (`NUM_VCS > 1) ? $clog2(`NUM_VCS) : 1;
-  localparam dest_bits = $clog2(`NUM_USER_RECV_PORTS);
+  localparam vc_bits = 2;
+  localparam dest_bits = 5;
   localparam flit_port_width = 2 /*valid and tail bits*/+ `FLIT_DATA_WIDTH + dest_bits + vc_bits;
   localparam credit_port_width = 1 + vc_bits; // 1 valid bit
   localparam test_cycles = 20;
@@ -84,7 +84,7 @@ module CONNECT_testbench_sample();
   reg [`FLIT_DATA_WIDTH-1:0] data;
 
   // Counter
-  localparam counter_bits = $clog2(`FLIT_BUFFER_DEPTH) + 1;
+  localparam counter_bits = 5;
   // 0 <= counter[vc] <= 16 
   reg [counter_bits - 1 : 0] credit_counter [0:`NUM_USER_RECV_PORTS-1];
   
@@ -107,7 +107,7 @@ module CONNECT_testbench_sample();
     #(HalfClkPeriod);
 
     // send a 2-flit packet from send port 0 to receive port 1
-	if(credit_counter[0] > 1) begin
+	if(credit_counter[0] >= 1) begin
 		send_flit[0] = 1'b1;
 		dest = 1;
 		vc = 0;
@@ -118,7 +118,7 @@ module CONNECT_testbench_sample();
 
     #(ClkPeriod);
     // send 2nd flit of packet
-	if(credit_counter[0] > 1) begin
+	if(credit_counter[0] >= 1) begin
 		send_flit[0] = 1'b1;
 		data = 'hb;
 		flit_in[0] = {1'b1 /*valid*/, 1'b1 /*tail*/, dest, vc, data};
