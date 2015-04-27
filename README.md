@@ -15,3 +15,9 @@ Increase clock frequency by 90MHz
 15,359,860,129 clocks / 190MHz = 80.84 sec
 Hash rate = 78233580/80.84 sec = 0.967758 Mhash/s
 Total on-chip power = 0.285W
+
+Minimize States:
+10,352,910,817 clocks / 170MHz = 60.9 sec
+Hash rate = 78233580/60.9 sec = 1.28 Mhash/s
+Total on-chip power = 0.27W
+

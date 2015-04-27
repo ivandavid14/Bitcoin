@@ -9,10 +9,10 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
 
     reg [31:0] H [0:7];
     reg [31:0] W [0:15];
-    reg [31:0] a,b,c,d,e,f,g,h,t1_0,t1_1,t2,w;
+    reg [31:0] a,b,c,d,e,f,g,h,t1,t2,w;
 
     wire [31:0] k;
-    reg [5:0] k_addr;
+    wire [5:0] k_addr;
     reg [6:0] round;
     reg [3:0] i, j;
     reg [1:0] blknum;
@@ -28,13 +28,14 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
     
     localparam
     INI				= 4'd0,
-    UPDATE_W		= 4'd1,
-    COMPRESSION_1	= 4'd2,
-    COMPRESSION_2	= 4'd3,
-    DONE			= 4'd4,
-    IDLE			= 4'd5,
-    BEGIN			= 4'd6,
-    WAIT_ONE_CLOCK	= 4'd7;
+    UPDATE			= 4'd1,
+    COMPRESSION		= 4'd2,
+    DONE			= 4'd3,
+    IDLE			= 4'd4,
+    BEGIN			= 4'd5,
+    WAIT_ONE_CLOCK	= 4'd6;
+	
+	assign k_addr = round;
     
     always @(posedge CLK, negedge nreset)
     begin: CU
@@ -81,9 +82,10 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                     W[1] <= msg[ 31 + 32*14 : 32*14 ];
                     W[0] <= msg[ 31 + 32*15 : 32*15 ];
                     
-                    state <= UPDATE_W;
+                    state <= UPDATE;
                 end
-                UPDATE_W:
+				
+                UPDATE:
                 begin
                     if (round < 16)
                         w <= W[round];
@@ -91,33 +93,30 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                         w <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
                         for (i=0; i<=14; i=i+1)
                             W[i] <= W[(i+1)];
-                        W[15] <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
+                        //W[15] <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
                     end
-					k_addr <= round;
-                    state <= COMPRESSION_1;
-                end
-              
-                COMPRESSION_1:
-                begin
-                    t1_0 <= Sigma1(e) + h + k;
-					t1_1 <= Ch(e, f, g) + w;
-                    t2 <= Sigma0(a) + Maj(a, b, c);
-                    state <= COMPRESSION_2;
+					
+					t1 <= (Sigma1(e) + h) + (Ch(e, f, g) + k);
+					t2 <= Sigma0(a) + Maj(a, b, c);
+					
+                    state <= COMPRESSION;
                 end
                 
-                COMPRESSION_2:
+                COMPRESSION:
                 begin
+                    if (round >= 16)
+                        W[15] <= w;
                     h <= g;
                     g <= f;
                     f <= e;
-                    e <= (d + t1_0 + t1_1);
+                    e <= (d + t1 + w);
                     d <= c;
                     c <= b;
                     b <= a;
-                    a <= (t1_0 + t1_1 + t2);
+                    a <= (t1 + w + t2);
 
                     if( round < 63) begin
-                        state <= UPDATE_W;
+                        state <= UPDATE;
                         round <= round + 1;
                     end else
                         state <= DONE;
@@ -173,7 +172,6 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                         H[5] <= 32'h9b05688c;      
                         H[6] <= 32'h1f83d9ab;
                         H[7] <= 32'h5be0cd19;
-                        k_addr <= 6'b0;
                         round <= 0;
                         blknum <= 2'b00;
                     end
