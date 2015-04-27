@@ -6,6 +6,9 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 	output [15:0] LED;
 	output [7:0] CATHODE;
 	output [7:0] AN;
+	
+	clk_wiz_0 cw(sys_clk,hash_clk,slow_clk);
+	
 	reg [31:0] word_out;
 	reg [63:0] Clk_cnt;
 	
@@ -52,7 +55,7 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 
 	localparam testheader = 640'h8601a8807d39ef0f73ac5b3aac28c527c89542b8029600809f5fe5ace2ea82b273fcdb297fba14e33f9d2921356b84cf853b629d639e028729d5b40f2b0f6a9649b8965140e8a10adf06070a00000000;
 	
-	always @(posedge sys_clk)
+	always @(posedge hash_clk)
 	begin
 		if (reset)
 		begin
@@ -60,7 +63,7 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 			state <= INIT;
 			blk_iteration <= 1'b0;
 			start <= 1'b0;
-			nonce <= 32'h0000_0000;
+			nonce <= 32'd0;
 			found_nonce <= 1'b0;
 			processor_id <= 0;
 		end
@@ -145,17 +148,14 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 			endcase
 		end
 	end
-    SHA256 UUT(.CLK(sys_clk), .nreset(~reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
+    SHA256 UUT(.CLK(hash_clk), .nreset(~reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
 
 	assign LED[15] = found_nonce;
-	assign LED[14] = state[2];
-	assign LED[13] = state[1];
-	assign LED[12] = state[0];
-	assign LED[11:8] = {reset,reset,reset,reset};
+	assign LED[14:8] = {7{reset}};
 	wire [7:0] LED_walk;
 	assign LED[7:0] = LED_walk;
 	
-	always @(posedge sys_clk)
+	always @(posedge hash_clk)
 	begin
 		if (reset)
 			Clk_cnt <= 0;
@@ -176,6 +176,7 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 		else
 			word_out = nonce;		
 	end
-	nexys4_display d1(.clk_in(sys_clk), .LED_proc(LED_walk), .CATHODE_proc(CATHODE), .AN_proc(AN), .Word(word_out),
+	nexys4_display d1(.clk_in(slow_clk), .LED_proc(LED_walk), .CATHODE_proc(CATHODE), .AN_proc(AN), .Word(word_out),
 	.BTNC_in(BTNC));
+	
 endmodule

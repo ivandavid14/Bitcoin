@@ -9,7 +9,7 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
 
     reg [31:0] H [0:7];
     reg [31:0] W [0:15];
-    reg [31:0] a,b,c,d,e,f,g,h,t1,t2,w;
+    reg [31:0] a,b,c,d,e,f,g,h,t1_0,t1_1,t2,w;
 
     wire [31:0] k;
     reg [5:0] k_addr;
@@ -27,16 +27,14 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
     HEADER  =   7'd2;
     
     localparam
-    INI         =   7'd0,
-    UPDATE_W    =   7'd1,
-    UPDATE_K    =   7'd2,
-    COMPRESSION_1=  7'd3,
-    COMPRESSION_2=  7'd4,
-    UPDATE      =   7'd5,
-    DONE        =   7'd6,
-    IDLE        =   7'd7,
-    BEGIN       =   7'd8,
-    WAIT_ONE_CLOCK = 7'd9;
+    INI				= 4'd0,
+    UPDATE_W		= 4'd1,
+    COMPRESSION_1	= 4'd2,
+    COMPRESSION_2	= 4'd3,
+    DONE			= 4'd4,
+    IDLE			= 4'd5,
+    BEGIN			= 4'd6,
+    WAIT_ONE_CLOCK	= 4'd7;
     
     always @(posedge CLK, negedge nreset)
     begin: CU
@@ -95,19 +93,15 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                             W[i] <= W[(i+1)];
                         W[15] <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
                     end
-                    state <= UPDATE_K;
-                end
-                
-                UPDATE_K:
-                begin
-                    k_addr = round;
+					k_addr <= round;
                     state <= COMPRESSION_1;
                 end
-                
+              
                 COMPRESSION_1:
                 begin
-                    t1 <= T1(e, f, g, h, k, w);
-                    t2 <= T2(a, b, c);
+                    t1_0 <= Sigma1(e) + h + k;
+					t1_1 <= Ch(e, f, g) + w;
+                    t2 <= Sigma0(a) + Maj(a, b, c);
                     state <= COMPRESSION_2;
                 end
                 
@@ -116,45 +110,40 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                     h <= g;
                     g <= f;
                     f <= e;
-                    e <= (d + t1);
+                    e <= (d + t1_0 + t1_1);
                     d <= c;
                     c <= b;
                     b <= a;
-                    a <= (t1 + t2);
+                    a <= (t1_0 + t1_1 + t2);
 
-                    
-                    
                     if( round < 63) begin
                         state <= UPDATE_W;
                         round <= round + 1;
                     end else
-                        state <= UPDATE;
+                        state <= DONE;
                 end
-                UPDATE:
-                begin
-                    H[0] = (H[0] + a);
-                    H[1] = (H[1] + b);
-                    H[2] = (H[2] + c);
-                    H[3] = (H[3] + d);
-                    H[4] = (H[4] + e);
-                    H[5] = (H[5] + f);
-                    H[6] = (H[6] + g);
-                    H[7] = (H[7] + h); 
-                    
-                    state <= DONE;
-                end
+
                 DONE:
                 begin
+					H[0] <= (H[0] + a);
+                    H[1] <= (H[1] + b);
+                    H[2] <= (H[2] + c);
+                    H[3] <= (H[3] + d);
+                    H[4] <= (H[4] + e);
+                    H[5] <= (H[5] + f);
+                    H[6] <= (H[6] + g);
+                    H[7] <= (H[7] + h); 
+					
                     //for (i=0; i<=7; i=i+1)
-                    hash[ 31 + 32*0 : 32*0 ] <= H[7];
-                    hash[ 31 + 32*1 : 32*1 ] <= H[6];
-                    hash[ 31 + 32*2 : 32*2 ] <= H[5];
-                    hash[ 31 + 32*3 : 32*3 ] <= H[4];
+                    hash[ 31 + 32*0 : 32*0 ] <= (H[7] + h);
+                    hash[ 31 + 32*1 : 32*1 ] <= (H[6] + g);
+                    hash[ 31 + 32*2 : 32*2 ] <= (H[5] + f);
+                    hash[ 31 + 32*3 : 32*3 ] <= (H[4] + e);
                     
-                    hash[ 31 + 32*4 : 32*4 ] <= H[3];
-                    hash[ 31 + 32*5 : 32*5 ] <= H[2];
-                    hash[ 31 + 32*6 : 32*6 ] <= H[1];
-                    hash[ 31 + 32*7 : 32*7 ] <= H[0];
+                    hash[ 31 + 32*4 : 32*4 ] <= (H[3] + d);
+                    hash[ 31 + 32*5 : 32*5 ] <= (H[2] + c);
+                    hash[ 31 + 32*6 : 32*6 ] <= (H[1] + b);
+                    hash[ 31 + 32*7 : 32*7 ] <= (H[0] + a);
                     
                     blk_done <= 1;
                     
@@ -193,44 +182,53 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
         end
     end
 
-    function [31:0] rotate (input [31:0] data, input [4:0] shift);
+	/*
+	function [31:0] rotate (input [31:0] data, input [4:0] shift);
         reg [63:0] temp;
         begin
           temp = {data, data} >> shift;
           rotate = temp[31:0];
         end
     endfunction
+	*/
 
     function [31 : 0] Ch;
         input [31 : 0] x,y,z;
-        Ch = (x & y) ^ (~x & z);
+        Ch = z ^ (x & (y ^ z));
+		//Ch = (x & y) | (~x & z);
     endfunction
 
     function [31 : 0] Maj;
         input [31 : 0] x,y,z;
-        Maj = (x & y) ^ (x & z) ^ (y & z);
+        Maj = (x & y) | (z & (x | y));
+		//Maj = (x & y) | (x & z) | (y & z);
     endfunction
 
     function [31 : 0] Sigma0;
         input [31 : 0] x;
-        Sigma0 = rotate(x, 2) ^ rotate(x, 13) ^ rotate(x, 22);
+        Sigma0 = {x[1:0], x[31:2]} ^ {x[12:0], x[31:13]} ^ {x[21:0], x[31:22]};
+		//Sigma0 = rotate(x, 2) ^ rotate(x, 13) ^ rotate(x, 22);
     endfunction
 
     function [31 : 0] Sigma1;
         input [31 : 0] x;
-        Sigma1 = rotate(x, 6) ^ rotate(x, 11) ^ rotate(x, 25);
+        Sigma1 = {x[5:0], x[31:6]} ^ {x[10:0], x[31:11]} ^ {x[24:0], x[31:25]};
+		//Sigma1 = rotate(x, 6) ^ rotate(x, 11) ^ rotate(x, 25);
     endfunction
 
     function [31 : 0] Delta0;
         input [31 : 0] x;
-        Delta0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >> 3);
+        Delta0 = {x[6:0], x[31:7]} ^ {x[17:0], x[31:18]} ^ (x >> 3);
+		//Delta0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >> 3);
     endfunction
 
     function [31 : 0] Delta1;
         input [31 : 0] x;
-        Delta1 = rotate(x, 17) ^ rotate(x, 19) ^ (x >> 10);
+        Delta1 = {x[16:0], x[31:17]} ^ {x[18:0], x[31:19]} ^ (x >> 10);
+		//Delta1 = rotate(x, 17) ^ rotate(x, 19) ^ (x >> 10);
     endfunction
-
+	
+	/*
     function [31 : 0] T1;
         input [31 : 0] e, f, g, h, k, w;
         T1 = (h + Sigma1(e) + Ch(e, f, g) + k + w);
@@ -240,5 +238,6 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
         input [31 : 0] a, b, c;
         T2 = (Sigma0(a) + Maj(a, b, c));
     endfunction
+	*/
 
 endmodule

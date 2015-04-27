@@ -54,6 +54,11 @@ assign LED_proc[7:0] = divclk[27] ? 8'b11111111 : walking_leds;
 
 reg [31:0] Word_slow;
 
+always @ (divclk[27])
+begin
+	Word_slow <= Word;
+end
+
 always @ (slow_bits)
 begin
 	case (slow_bits)
@@ -67,7 +72,6 @@ begin
 		3'b111: walking_leds = 8'b10000000 ;
 		default:walking_leds = 8'bXXXXXXXX ;
 	endcase
-	Word_slow <= Word;
 end
 
 
