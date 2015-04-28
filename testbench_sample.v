@@ -45,7 +45,7 @@
 
 `timescale 1ns / 1ps
 
-`include "connect_parameters.v"
+`include "noc/connect_parameters.v"
 
 
 module CONNECT_testbench_sample();
@@ -104,31 +104,31 @@ module CONNECT_testbench_sample();
     Rst_n = 0; // perform reset (active low)
     #(5*ClkPeriod+HalfClkPeriod);
     Rst_n = 1;
-    #(HalfClkPeriod);
+    //#(HalfClkPeriod);
 
     // send a 2-flit packet from send port 0 to receive port 1
-	if(credit_counter[0] >= 1) begin
-		send_flit[0] = 1'b1;
-		dest = 1;
-		vc = 0;
-		data = 'ha;
-		flit_in[0] = {1'b1 /*valid*/, 1'b0 /*tail*/, dest, vc, data};
-		$display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
-	end
+	//if(credit_counter[0] >= 1) begin
+		//send_flit[0] = 1'b1;
+		//dest = 1;
+		//vc = 0;
+		//data = 'ha;
+		//flit_in[0] = {1'b1 /*valid*/, 1'b0 /*tail*/, dest, vc, data};
+		//$display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
+	//end
 
-    #(ClkPeriod);
+    //#(ClkPeriod);
     // send 2nd flit of packet
-	if(credit_counter[0] >= 1) begin
-		send_flit[0] = 1'b1;
-		data = 'hb;
-		flit_in[0] = {1'b1 /*valid*/, 1'b1 /*tail*/, dest, vc, data};
-		$display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
-	end
+	//if(credit_counter[0] >= 1) begin
+		//send_flit[0] = 1'b1;
+		//data = 'hb;
+		//flit_in[0] = {1'b1 /*valid*/, 1'b1 /*tail*/, dest, vc, data};
+		//$display("@%3d: Injecting flit %x into send port %0d", cycle, flit_in[0], 0);
+	//end
 
-    #(ClkPeriod);
+    //#(ClkPeriod);
     // stop sending flits
-    send_flit[0] = 1'b0;
-    flit_in[0] = 'b0; // valid bit
+    //send_flit[0] = 1'b0;
+    //flit_in[0] = 'b0; // valid bit
   end
 
 
@@ -138,39 +138,47 @@ module CONNECT_testbench_sample();
     for(i = 0; i < `NUM_USER_RECV_PORTS; i = i + 1) begin
       if(flit_out[i][flit_port_width-1]) begin // valid flit
         $display("@%3d: Ejecting flit %x at receive port %0d", cycle, flit_out[i], i);
+		send_credit[i] <= 1'b1;
+		credit_in[i] <= 3'b100;
       end
+	  else begin
+		send_credit[i] <= 0;
+		credit_in[i] <= 0;
+	  end
     end
 
     // terminate simulation
     if (cycle > test_cycles) begin
-      $finish();
+      //$finish();
     end
   end
 
 	// Add your code to handle flow control here (sending receiving credits)
   always @ (posedge Clk) begin
 	// Increment counter after flit leaves router
-    for(i = 0; i < `NUM_USER_RECV_PORTS; i = i + 1) begin
-      if(credit_out[i][credit_port_width-1]) begin // Valid credit
-		send_credit[i] <= 1'b1;
-		credit_in[i] <= 3'b100;
-		if(credit_counter[i] < 16)
+    for(i = 0; i < 25; i = i + 1) begin
+		if( credit_out[i][credit_port_width-1] & (send_flit[i] == 1'b1) ) // Using and receiving credit at once
+			credit_counter[i] <= credit_counter[i];
+		else if(credit_out[i][credit_port_width-1] & (credit_counter[i] < 16) ) // Receiving credit
 			credit_counter[i] <= credit_counter[i] + 1; // Only using vc 0
-      end else begin
-		  send_credit[i] <= 0;
-		  credit_in[i] <= 0;
-	  end
-    end
-  
-	// Decrement counter after send
-    for(i = 0; i < `NUM_USER_SEND_PORTS; i = i + 1) begin
-      if(send_flit[i] == 1'b1) begin // valid flit
-		if(credit_counter[i] > 0)
+		else if( (send_flit[i] == 1'b1) & (credit_counter[i] > 0) ) // Using credit
 			credit_counter[i] <= credit_counter[i] - 1;
-      end
     end
-  end 
+  end
+
+	wire ctrl_EN_flit;
+	wire [flit_port_width-1:0] ctrl_flit_out;
+	reg [credit_port_width-1:0] ctrl_getCredits;
+	
+	always @(*) begin
+		send_flit[0] = ctrl_EN_flit;
+		flit_in[0] = ctrl_flit_out;
+		ctrl_getCredits = credit_out[0];
+	end
   
+  controller c25(.CLK(Clk), .nreset(Rst_n), .putFlit(ctrl_flit_out), .EN_putFlit(ctrl_EN_flit)
+  , .getCredits(ctrl_getCredits) );
+  //,getFlit, EN_getFlit, putCredits, EN_putCredits);
   
   // Instantiate CONNECT network
   mkNetwork dut

@@ -19998,7 +19998,7 @@ module mkNetwork(CLK,
   assign recv_ports_info_24_getRecvPortID = 5'd24 ;
 
   // submodule net_routers_routeTable_10_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20012,7 +20012,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_10_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_10_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20026,7 +20026,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_10_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_10_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20040,7 +20040,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_10_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_10_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20054,7 +20054,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_10_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_10.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20068,7 +20068,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_10_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_11_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20082,7 +20082,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_11_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_11_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20096,7 +20096,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_11_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_11_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20110,7 +20110,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_11_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_11_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20124,7 +20124,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_11_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_11_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_11.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20138,7 +20138,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_11_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_12_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20152,7 +20152,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_12_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_12_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20166,7 +20166,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_12_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_12_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20180,7 +20180,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_12_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_12_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20194,7 +20194,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_12_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_12_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_12.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20208,7 +20208,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_12_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_13_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20222,7 +20222,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_13_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_13_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20236,7 +20236,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_13_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_13_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20250,7 +20250,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_13_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_13_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20264,7 +20264,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_13_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_13_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_13.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20278,7 +20278,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_13_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_14_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20292,7 +20292,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_14_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_14_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20306,7 +20306,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_14_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20320,7 +20320,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_14_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_14_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20334,7 +20334,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_14_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_14_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_14.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20348,7 +20348,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_14_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_15_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20362,7 +20362,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_15_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_15_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20376,7 +20376,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_15_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_15_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20390,7 +20390,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_15_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_15_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20404,7 +20404,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_15_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_15.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20418,7 +20418,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_15_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_16_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20432,7 +20432,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_16_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_16_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20446,7 +20446,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_16_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_16_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20460,7 +20460,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_16_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_16_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20474,7 +20474,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_16_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_16_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_16.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20488,7 +20488,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_16_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_17_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20502,7 +20502,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_17_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_17_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20516,7 +20516,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_17_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_17_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20530,7 +20530,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_17_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_17_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20544,7 +20544,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_17_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_17_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_17.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20558,7 +20558,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_17_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_18_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20572,7 +20572,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_18_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_18_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20586,7 +20586,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_18_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_18_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20600,7 +20600,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_18_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_18_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20614,7 +20614,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_18_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_18_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_18.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20628,7 +20628,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_18_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_19_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20642,7 +20642,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_19_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_19_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20656,7 +20656,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_19_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20670,7 +20670,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_19_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_19_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20684,7 +20684,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_19_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_19_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_19.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20698,7 +20698,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_19_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_1_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20712,7 +20712,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_1_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_1_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20726,7 +20726,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_1_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_1_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20740,7 +20740,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_1_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_1_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20754,7 +20754,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_1_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_1_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_1.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20768,7 +20768,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_20_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20782,7 +20782,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_20_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_20_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20796,7 +20796,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_20_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_20_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20810,7 +20810,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_20_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20824,7 +20824,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_20_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_20.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20838,7 +20838,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_20_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_21_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20852,7 +20852,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_21_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_21_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20866,7 +20866,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_21_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_21_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20880,7 +20880,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_21_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20894,7 +20894,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_21_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_21_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_21.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20908,7 +20908,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_21_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_22_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20922,7 +20922,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_22_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_22_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20936,7 +20936,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_22_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_22_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20950,7 +20950,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_22_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20964,7 +20964,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_22_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_22_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_22.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20978,7 +20978,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_22_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_23_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -20992,7 +20992,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_23_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_23_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21006,7 +21006,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_23_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_23_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21020,7 +21020,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_23_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21034,7 +21034,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_23_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_23_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_23.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21048,7 +21048,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_23_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_24_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21062,7 +21062,7 @@ module mkNetwork(CLK,
 										      .D_OUT_1(net_routers_routeTable_24_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_24_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21076,7 +21076,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_24_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21090,7 +21090,7 @@ module mkNetwork(CLK,
 											.D_OUT_1());
 
   // submodule net_routers_routeTable_24_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21104,7 +21104,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_24_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_24_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_24.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21118,7 +21118,7 @@ module mkNetwork(CLK,
 											.D_OUT_1(net_routers_routeTable_24_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_2_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21132,7 +21132,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_2_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_2_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21146,7 +21146,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_2_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_2_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21160,7 +21160,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_2_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_2_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21174,7 +21174,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_2_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_2_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_2.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21188,7 +21188,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_3_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21202,7 +21202,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_3_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_3_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21216,7 +21216,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_3_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_3_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21230,7 +21230,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_3_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_3_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21244,7 +21244,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_3_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_3_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_3.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21258,7 +21258,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_4_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21272,7 +21272,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_4_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_4_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21286,7 +21286,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_4_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21300,7 +21300,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_4_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_4_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21314,7 +21314,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_4_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_4_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_4.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21328,7 +21328,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_5_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21342,7 +21342,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_5_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_5_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21356,7 +21356,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_5_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_5_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21370,7 +21370,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_5_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_5_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21384,7 +21384,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_5_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_5.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21398,7 +21398,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_5_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_6_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21412,7 +21412,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_6_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_6_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21426,7 +21426,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_6_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_6_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21440,7 +21440,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_6_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_6_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21454,7 +21454,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_6_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_6_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_6.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21468,7 +21468,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_6_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_7_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21482,7 +21482,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_7_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_7_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21496,7 +21496,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_7_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_7_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21510,7 +21510,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_7_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_7_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21524,7 +21524,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_7_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_7_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_7.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21538,7 +21538,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_7_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_8_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21552,7 +21552,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_8_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_8_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21566,7 +21566,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_8_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_8_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21580,7 +21580,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_8_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_8_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21594,7 +21594,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_8_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_8_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_8.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21608,7 +21608,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_8_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_9_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21622,7 +21622,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_9_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_9_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21636,7 +21636,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1());
 
   // submodule net_routers_routeTable_9_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21650,7 +21650,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_9_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_9_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21664,7 +21664,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_9_rt_ifc_banks_banks_rf_3$D_OUT_1));
 
   // submodule net_routers_routeTable_9_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_9.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21678,7 +21678,7 @@ module mkNetwork(CLK,
 										       .D_OUT_1(net_routers_routeTable_9_rt_ifc_banks_banks_rf_4$D_OUT_1));
 
   // submodule net_routers_routeTable_rt_ifc_banks_banks_rf
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21692,7 +21692,7 @@ module mkNetwork(CLK,
 										   .D_OUT_1(net_routers_routeTable_rt_ifc_banks_banks_rf$D_OUT_1));
 
   // submodule net_routers_routeTable_rt_ifc_banks_banks_rf_1
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21706,7 +21706,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_rt_ifc_banks_banks_rf_1$D_OUT_1));
 
   // submodule net_routers_routeTable_rt_ifc_banks_banks_rf_2
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21720,7 +21720,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1(net_routers_routeTable_rt_ifc_banks_banks_rf_2$D_OUT_1));
 
   // submodule net_routers_routeTable_rt_ifc_banks_banks_rf_3
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,
@@ -21734,7 +21734,7 @@ module mkNetwork(CLK,
 										     .D_OUT_1());
 
   // submodule net_routers_routeTable_rt_ifc_banks_banks_rf_4
-  RegFileLoadSyn #( /*file*/ "mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
+  RegFileLoadSyn #( /*file*/ "noc/mesh_25RTs_4VCs_8BD_64DW_SepIFStaticAlloc_5RTsPerRow_5RTsPerCol_routing_0.hex",
 		    /*addr_width*/ 32'd5,
 		    /*data_width*/ 32'd3,
 		    /*lo*/ 32'd0,

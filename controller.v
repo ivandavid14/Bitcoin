@@ -1,4 +1,4 @@
-`include "connect_parameters.v"
+`include "noc/connect_parameters.v"
 
 module controller(CLK, nreset, putFlit, EN_putFlit, getCredits, EN_getCredits,
                   getFlit, EN_getFlit, putCredits, EN_putCredits);
@@ -68,14 +68,13 @@ module controller(CLK, nreset, putFlit, EN_putFlit, getCredits, EN_getCredits,
     reg [9:0] msg_counter;
     
     wire[639:0] msg_tb_640;
-    assign msg_tb_640[639:0] = {640'hcdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361cdd1babeb9616ba90edc69a05c086b08b4ad1fee05e68c1093ba7b07328e1361b4ad1fee05e68c1093ba7b07328e1361};
+    assign msg_tb_640[639:0] = {640'h8601a8807d39ef0f73ac5b3aac28c527c89542b8029600809f5fe5ace2ea82b273fcdb297fba14e33f9d2921356b84cf853b629d639e028729d5b40f2b0f6a9649b8965140e8a10adf06070a00000000};
     
     always@(posedge CLK or negedge nreset)
         begin
             if (!nreset)
                 begin
                     block_counter <= 8'h00;
-                    data_store <= 64'h00000000;
                     state <= INIT;
                     credit_counter <= 16;
                     EN_putFlit <= 0;
@@ -86,6 +85,7 @@ module controller(CLK, nreset, putFlit, EN_putFlit, getCredits, EN_getCredits,
                     state <= INIT;
                     msg_counter <= 0;
                     vc <= 0;
+					dest <= 1;
                 end
             else
                 begin
@@ -108,7 +108,7 @@ module controller(CLK, nreset, putFlit, EN_putFlit, getCredits, EN_getCredits,
                                         msg_tb_640[msg_counter+:64]}; // actual data
                                     msg_counter <= (msg_counter + 64) % 640;
                                     
-                                    if (msg_counter == 10'd576)
+                                    if (msg_counter == 10'd576) //(msg_counter == 10'd448) 
                                         begin
                                             dest <= (dest + 1) % 25;
                                             if (dest == 24)
