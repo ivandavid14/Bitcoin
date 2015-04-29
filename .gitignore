@@ -2,3 +2,9 @@ work/
 Bitcoin.cr.mti
 Bitcoin.mpf
 vsim.wlf
+Bitcoin.sim/
+Bitcoin.cache/
+Bitcoin.xpr
+Bitcoin.runs/
+Bitcoin.srcs/
+*.bak

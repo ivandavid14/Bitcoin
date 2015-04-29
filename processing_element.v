@@ -1,15 +1,26 @@
-module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce);
-    input sys_clk,BTNC;
-	input [15:0] SW;
-	/*input*/ reg [4:0] processor_id;
-	//output reg found_nonce;
-	output [15:0] LED;
-	output [7:0] CATHODE;
-	output [7:0] AN;
+`timescale 1ns / 1ps
+`include "noc/connect_parameters.v"
+
+module processing_element(sys_clk, reset, processor_id, flit, send_credit, credit_in, EN_putFlit, putFlit); //, found_nonce);
+    input sys_clk, reset;
+	input [4:0] processor_id;
 	
-	clk_wiz_0 cw(sys_clk,hash_clk,slow_clk);
+	localparam vc_bits = 2;
+	localparam dest_bits = 5;
+	localparam flit_port_width = 2 /*valid and tail bits*/+ `FLIT_DATA_WIDTH + dest_bits + vc_bits;
+	localparam credit_port_width = 1 + vc_bits; // 1 valid bit
+	localparam test_cycles = 20;
 	
-	reg [31:0] word_out;
+    // stores data to be sent into network 
+    output reg [flit_port_width-1:0] putFlit;
+     
+    // bit to put a flit in the network
+    output reg EN_putFlit;
+	
+	input [flit_port_width-1:0] flit;
+	output reg send_credit;
+	output reg [credit_port_width-1:0] credit_in;
+	
 	reg [63:0] Clk_cnt;
 	
 	reg found_nonce;
@@ -21,12 +32,15 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
     wire blk_done;
     reg start;
 	reg [31:0] nonce;
+	reg [9:0] flit_cnt;
+	//reg [`FLIT_DATA_WIDTH-1:0] data [0:9];
 
     reg [2:0] state;
     reg blk_iteration;
 
 	wire reset;
-	assign reset = BTNC;
+	reg [2:0] output_cnt;
+	//assign reset = BTNC;
 	
 	/*reg reset, sim_clk;	
 	initial begin
@@ -40,13 +54,14 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 	*/
 	
     localparam
-    INIT =                 3'b001,
-    PREPROCESS =           3'b011,
-    INPUT_FIRST_BLOCK =    3'b010,
-    FIRST_BLOCK_WAITING =  3'b110,
-    SECOND_BLOCK_WAITING = 3'b111,
-    WAIT_HASH =            3'b101,
-    DONE =                 3'b100;
+    INIT =                 3'd0,
+    PREPROCESS =           3'd1,
+    INPUT_FIRST_BLOCK =    3'd2,
+    FIRST_BLOCK_WAITING =  3'd3,
+    SECOND_BLOCK_WAITING = 3'd4,
+    WAIT_HASH =            3'd5,
+    SEND_RESULT =          3'd6,
+	DONE =				   3'd7;
 
     localparam
     HASH =         2'b00,
@@ -54,18 +69,24 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
     HEADER =       2'b10;
 
 	localparam testheader = 640'h8601a8807d39ef0f73ac5b3aac28c527c89542b8029600809f5fe5ace2ea82b273fcdb297fba14e33f9d2921356b84cf853b629d639e028729d5b40f2b0f6a9649b8965140e8a10adf06070a00000000;
+	localparam FOUND_BITCOIN_MSG = 64'h00000001;
 	
-	always @(posedge hash_clk)
+	always @(posedge sys_clk)
 	begin
-		if (reset)
+		if (~reset)
 		begin
 			blk_type <= 2'b11;
 			state <= INIT;
 			blk_iteration <= 1'b0;
 			start <= 1'b0;
-			nonce <= 32'd0;
+			nonce <= processor_id - 1 + 'ha;  // first processor_id = 1
 			found_nonce <= 1'b0;
-			processor_id <= 0;
+			//processor_id <= 0;
+			flit_cnt <= 0;
+			buffer <= 0;
+			EN_putFlit <= 1'b0;
+			putFlit <= 0;
+			output_cnt <= 0;
 		end
 		else
 		begin
@@ -74,13 +95,28 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 				begin
 					start <= 1'b0;
 					blk_iteration <= 1'b0;
-					buffer <= testheader;
+					//buffer <= testheader;
 					blk_type <= HEADER;
-					state <= PREPROCESS;
+					
+					if(flit[flit_port_width-1]) begin // valid flit
+						$display("Ejecting flit %x at receive port %0d", flit, processor_id);
+						send_credit <= 1'b1;
+						credit_in <= 3'b100;
+						buffer[flit_cnt+:64] <= flit[63:0];
+						flit_cnt <= (flit_cnt + 64) % 640;
+					end
+					else begin
+						send_credit <= 0;
+						credit_in <= 0;
+					end
+					
+					if(flit_cnt == 576)
+						state <= PREPROCESS;
 				end
 				
 				PREPROCESS:
 				begin
+					//$display("buffer = %h", buffer);
 					if (blk_type == MERKLE_LEAF)
 					begin
 						buffer <= {buffer[511:0],1'b1,{447{1'b0}},64'h200};
@@ -95,8 +131,13 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 				INPUT_FIRST_BLOCK:
 				begin
 					msg_in <= buffer[1023:512];
+					
 					state <= FIRST_BLOCK_WAITING;
 					start <= 1'b1;
+					/*
+					found_nonce <= 1'b1;
+					state <= SEND_RESULT;
+					*/
 				end
 				
 				FIRST_BLOCK_WAITING:
@@ -127,56 +168,81 @@ module processing_element(sys_clk, BTNC, LED, CATHODE, AN, SW); //, found_nonce)
 					if (blk_done & (hash_out[255:228] == 28'd0) & (nonce <= 32'hffff_ffff))
 					begin
 						found_nonce <= 1'b1;
-						state <= DONE;
+						state <= SEND_RESULT;
 					end
 					else if (blk_done & (hash_out[255:228] != 28'd0) & (nonce < 32'hffff_ffff))
 					begin
-						nonce <= nonce + 1'b1 + processor_id;
+						nonce <= nonce + 5'd24;
 						state <= INIT;
 					end
 					else
 						state <= state;
 				end
 				
+				SEND_RESULT:
+				begin
+					//if(processor_id == 5'd1)
+						//$stop;
+					EN_putFlit <= 1'b1;
+					
+					case (output_cnt)
+						0: begin
+							putFlit <= 
+							{1'b1, // Valid bit
+							(output_cnt == 2) ? 1'b1 : 1'b0, // Tail bit
+							5'd0,    // Destination 
+							2'd0,     // Virtual channel
+							FOUND_BITCOIN_MSG}; // actual data
+						end
+						1: begin
+							putFlit <= 
+							{1'b1, // Valid bit
+							(output_cnt == 2) ? 1'b1 : 1'b0, // Tail bit
+							5'd0,    // Destination 
+							2'd0,     // Virtual channel
+							{32'h0000_0000, nonce} }; // actual data
+						end
+						2: begin
+							putFlit <= 
+							{1'b1, // Valid bit
+							(output_cnt == 2) ? 1'b1 : 1'b0, // Tail bit
+							5'd0,    // Destination 
+							2'd0,     // Virtual channel
+							Clk_cnt }; // actual data
+						end
+						default: putFlit <= 0;
+					endcase
+
+					output_cnt = output_cnt + 1;
+					
+					if (output_cnt == 4) begin
+						EN_putFlit <= 1'b0;
+						state <= DONE;						
+					end
+				end
+				
 				DONE:
 				begin
-					
+					//$display("nonce = %h", nonce);
+					//$display("CLKS = %h", Clk_cnt);
+					//$stop;
 				end
 				
 				default:
-					state <= 3'd0;
+					state <= 3'd7;
 			endcase
 		end
 	end
-    SHA256 UUT(.CLK(hash_clk), .nreset(~reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
-
-	assign LED[15] = found_nonce;
-	assign LED[14:8] = {7{reset}};
-	wire [7:0] LED_walk;
-	assign LED[7:0] = LED_walk;
+    SHA256 UUT(.CLK(sys_clk), .nreset(~reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
 	
-	always @(posedge hash_clk)
+	always @(posedge sys_clk)
 	begin
-		if (reset)
+		if (~reset)
 			Clk_cnt <= 0;
-		else if( (Clk_cnt < 64'hffff_ffff_ffff_ffff) & (state != DONE) )
+		else if( (Clk_cnt < 64'hffff_ffff_ffff_ffff) & (~found_nonce) )
 			Clk_cnt <= Clk_cnt + 1'b1;
 		else
 			Clk_cnt <= Clk_cnt;
 	end
-	
-	always @(*)
-	begin
-		if(SW[0])
-			word_out = hash_out[255:224];
-		else if(SW[1])
-			word_out = Clk_cnt[31:0];
-		else if(SW[2])
-			word_out = Clk_cnt[63:32];
-		else
-			word_out = nonce;		
-	end
-	nexys4_display d1(.clk_in(slow_clk), .LED_proc(LED_walk), .CATHODE_proc(CATHODE), .AN_proc(AN), .Word(word_out),
-	.BTNC_in(BTNC));
 	
 endmodule
