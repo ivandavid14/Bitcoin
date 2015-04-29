@@ -8,3 +8,5 @@ Bitcoin.xpr
 Bitcoin.runs/
 Bitcoin.srcs/
 *.bak
+Bitcoin.hw/
+vish_stacktrace.vstf

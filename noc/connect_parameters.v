@@ -29,7 +29,7 @@
  * CONTRACT, TORT OR OTHERWISE).
  *
  */
-
+`define NUM_PE 1
 
 `define NUM_USER_SEND_PORTS 25
 `define NUM_USER_RECV_PORTS 25

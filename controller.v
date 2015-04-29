@@ -87,8 +87,8 @@ module controller(sys_clk, nreset, putFlit, EN_putFlit, getCredits, EN_getCredit
 	always @(*) begin
 		if (!nreset)
 			dest = 1;
-		else if( (msg_counter == 10'd512) & (dest > 0) & (dest < 24))
-			dest = (dest + 1) % 25;
+		else if( (msg_counter == 10'd512) & (dest > 0) & (dest < `NUM_PE))
+			dest = (dest + 1) % (`NUM_PE + 1);
 	end
 	
 	output reg [63:0] Clk_cnt;
@@ -138,6 +138,7 @@ module controller(sys_clk, nreset, putFlit, EN_putFlit, getCredits, EN_getCredit
 									state <= FOUND_BITCOIN;
 									EN_putFlit <= 1'b0;
 									putFlit <= 0;
+									done <= 1'b1;
 								end
 								EN_putCredits <= 1'b1;
 								putCredits <= 3'b100;
@@ -158,14 +159,14 @@ module controller(sys_clk, nreset, putFlit, EN_putFlit, getCredits, EN_getCredit
 									msg_64}; // actual data
 									msg_counter <= (msg_counter + 64) % 640;
 
-									if( (msg_counter == 0) & (dest == 24) )
+									if( (msg_counter == 0) & (dest == `NUM_PE) )
 										last_msg <= 1;
 
 									if ( (msg_counter == 10'd0) & last_msg )
 									begin
 										state <= CONFIRMATION_STATE;
 										EN_putFlit <= 1'b0;
-										putFlit <= 0;										
+										putFlit <= 0;											
 									end
 								end
 								else
@@ -181,8 +182,9 @@ module controller(sys_clk, nreset, putFlit, EN_putFlit, getCredits, EN_getCredit
 							begin 
 								if (getFlit[63:0] == FOUND_BITCOIN_MSG) // Found bitcoin
 								begin
-									$display("Found bitcoin");
+									$display("Controller: Found bitcoin");
 									state <= FOUND_BITCOIN;
+									done <= 1'b1;
 								end
 								EN_putCredits <= 1'b1;
 								putCredits <= 3'b100;
@@ -199,7 +201,9 @@ module controller(sys_clk, nreset, putFlit, EN_putFlit, getCredits, EN_getCredit
 							begin
 								nonce <= getFlit[31:0];
 								state <= OUTPUT_CLKS;
-									
+								
+								$display("Controller: nonce = %h", getFlit[31:0]);
+								
 								EN_putCredits <= 1'b1;
 								putCredits <= 3'b100;
 							end
@@ -215,7 +219,8 @@ module controller(sys_clk, nreset, putFlit, EN_putFlit, getCredits, EN_getCredit
 							begin
 								Clk_cnt <= getFlit[63:0];
 								state <= DONE;
-								done <= 1'b1;
+								
+								$display("Controller: clks = %h", getFlit[63:0]);
 									
 								EN_putCredits <= 1'b1;
 								putCredits <= 3'b100;

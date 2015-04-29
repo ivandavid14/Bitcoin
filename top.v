@@ -2,66 +2,54 @@
 
 `include "noc/connect_parameters.v"
 
+//`define SIM 1
 
+
+`ifndef SIM
 module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
-	input sys_clk;
-	//reg sys_clk;
+`else
+module top(BTNC, LED, CATHODE, AN, SW);
+`endif
 	input [15:0] SW;
 	input BTNC;
-	clk_wiz_0 cw(sys_clk, hash_clk, slow_clk);
 
-  parameter HalfClkPeriod = 5;
-  localparam ClkPeriod = 2*HalfClkPeriod;
-
-  // non-VC routers still reeserve 1 dummy bit for VC.
-  localparam vc_bits = 2;
-  localparam dest_bits = 5;
-  localparam flit_port_width = 2 /*valid and tail bits*/+ `FLIT_DATA_WIDTH + dest_bits + vc_bits;
-  localparam credit_port_width = 1 + vc_bits; // 1 valid bit
-  localparam test_cycles = 20;
-
-  //reg sys_clk;
-  wire Rst_n;
-  assign Rst_n = ~BTNC;
+	localparam flit_port_width = 73;
+	localparam credit_port_width = 3;
 
   // input regs
   wire send_flit [0:`NUM_USER_SEND_PORTS-1]; // enable sending flits
-  wire [flit_port_width-1:0] flit_in [0:`NUM_USER_SEND_PORTS-1]; // send port inputs
+  wire [73-1:0] flit_in [0:`NUM_USER_SEND_PORTS-1]; // send port inputs
 
   wire send_credit [0:`NUM_USER_RECV_PORTS-1]; // enable sending credits
   wire [credit_port_width-1:0] credit_in [0:`NUM_USER_RECV_PORTS-1]; //recv port credits
 
   // output wires
   wire [credit_port_width-1:0] credit_out [0:`NUM_USER_SEND_PORTS-1];
-  wire [flit_port_width-1:0] flit_out [0:`NUM_USER_RECV_PORTS-1];
-
-  reg [31:0] cycle;
-  integer i;
-
-  // packet fields
-  reg is_valid;
-  reg is_tail;
-  reg [dest_bits-1:0] dest;
-  reg [vc_bits-1:0]   vc;
-  reg [`FLIT_DATA_WIDTH-1:0] data;
-
-  // Counter
-  localparam counter_bits = 5;
-  // 0 <= counter[vc] <= 16 
-  reg [counter_bits - 1 : 0] credit_counter [0:`NUM_USER_RECV_PORTS-1];
+  wire [73-1:0] flit_out [0:`NUM_USER_RECV_PORTS-1];
   
-  // Generate Clock
-  /*reg Rst_n;
-  initial sys_clk = 0;
-  always #(HalfClkPeriod) sys_clk = ~sys_clk;
-	initial begin
-
-		Rst_n = 0; // perform reset (active low)
-		#(5*ClkPeriod+HalfClkPeriod);
-		Rst_n = 1;
-	end
-	*/
-  
+	`ifndef SIM
+		input sys_clk;
+   		clk_wiz_0 cw(sys_clk, hash_clk, slow_clk);
+		
+		wire Rst_n;
+		assign Rst_n = ~BTNC;
+	`else
+		parameter HalfClkPeriod = 2.5;
+		localparam ClkPeriod = 2*HalfClkPeriod;
+		reg sys_clk;
+		wire hash_clk, slow_clk;
+		assign hash_clk = sys_clk;
+		assign slow_clk = sys_clk;
+		initial sys_clk = 0;
+		always #(HalfClkPeriod) sys_clk = ~sys_clk;
+		
+		reg Rst_n;
+		initial begin
+			Rst_n = 0;
+			#(5*ClkPeriod+HalfClkPeriod);
+			Rst_n = 1;
+		end
+	`endif  
   
   //display vars
   reg [31:0] word_out;
@@ -114,7 +102,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
   always @ (posedge Clk) begin
     cycle <= cycle + 1;
     for(i = 0; i < `NUM_USER_RECV_PORTS; i = i + 1) begin
-      if(flit_out[i][flit_port_width-1]) begin // valid flit
+      if(flit_out[i][73-1]) begin // valid flit
         $display("@%3d: Ejecting flit %x at receive port %0d", cycle, flit_out[i], i);
 		send_credit[i] <= 1'b1;
 		credit_in[i] <= 3'b100;
@@ -143,10 +131,10 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
   */
 
 	/*wire ctrl_EN_flit;
-	wire [flit_port_width-1:0] ctrl_flit_out;
+	wire [73-1:0] ctrl_flit_out;
 	reg [credit_port_width-1:0] ctrl_getCredits;
 	
-	reg [flit_port_width-1:0] flit1;
+	reg [73-1:0] flit1;
 	wire send_credit1;
 	wire [credit_port_width-1:0] credit_in1;
 	
@@ -173,13 +161,19 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
   //controller c0(.sys_clk(sys_clk), .nreset(Rst_n), .putFlit(ctrl_flit_out), .EN_putFlit(ctrl_EN_flit), .getCredits(ctrl_getCredits) );
   //,EN_getFlit, getFlit, , EN_putCredits, putCredits, );
 	
+	wire [4:0] PE_done;
+	wire one_pe_done;
+	
+	assign one_pe_done = | PE_done[4:0];
+
 	generate
 		genvar j;
-		for(j=1; j<=5; j=j+1) begin
-			processing_element pe(.sys_clk(sys_clk), .reset(Rst_n), .flit(flit_out[j])
+		for(j=1; j <= `NUM_PE ; j=j+1) begin
+			processing_element pe(.sys_clk(hash_clk), .reset(Rst_n), .flit(flit_out[j])
 								, .send_credit(send_credit[j]), .credit_in(credit_in[j])
 								, .processor_id(j[4:0]) 
 								, .putFlit(flit_in[j]), .EN_putFlit(send_flit[j])
+								, .done_out(PE_done[j]), .done_in(one_pe_done)
 								);
 		end		
 	endgenerate
@@ -195,13 +189,11 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
 		
 	always @(*)
 	begin
-		/*
 		if(ctrl_done) begin
 			$display("nonce = %h", ctrl_nonce);
 			$display("CLKS = %h", ctrl_Clk_cnt);
 			$stop;
 		end
-		*/
 		if(SW[0])
 			word_out = ctrl_Clk_cnt[31:0];
 		else if(SW[1])
@@ -249,12 +241,12 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.EN_send_ports_5_putFlit(send_flit[5])
    ,.EN_send_ports_5_getCredits(1'b1)
    ,.send_ports_5_getCredits(credit_out[5])
-   /*
 
    ,.send_ports_6_putFlit_flit_in(flit_in[6])
    ,.EN_send_ports_6_putFlit(send_flit[6])
    ,.EN_send_ports_6_getCredits(1'b1)
    ,.send_ports_6_getCredits(credit_out[6])
+    
 
    ,.send_ports_7_putFlit_flit_in(flit_in[7])
    ,.EN_send_ports_7_putFlit(send_flit[7])
@@ -265,6 +257,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.EN_send_ports_8_putFlit(send_flit[8])
    ,.EN_send_ports_8_getCredits(1'b1)
    ,.send_ports_8_getCredits(credit_out[8])
+	/*
 
    ,.send_ports_9_putFlit_flit_in(flit_in[9])
    ,.EN_send_ports_9_putFlit(send_flit[9])
@@ -384,12 +377,11 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.recv_ports_5_putCredits_cr_in(credit_in[5])
    ,.EN_recv_ports_5_putCredits(send_credit[5])
    
-   /*
    ,.EN_recv_ports_6_getFlit(1'b1)
    ,.recv_ports_6_getFlit(flit_out[6])
    ,.recv_ports_6_putCredits_cr_in(credit_in[6])
    ,.EN_recv_ports_6_putCredits(send_credit[6])
-   
+
    ,.EN_recv_ports_7_getFlit(1'b1)
    ,.recv_ports_7_getFlit(flit_out[7])
    ,.recv_ports_7_putCredits_cr_in(credit_in[7])
@@ -399,6 +391,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.recv_ports_8_getFlit(flit_out[8])
    ,.recv_ports_8_putCredits_cr_in(credit_in[8])
    ,.EN_recv_ports_8_putCredits(send_credit[8])
+   /*
    
    ,.EN_recv_ports_9_getFlit(1'b1)
    ,.recv_ports_9_getFlit(flit_out[9])

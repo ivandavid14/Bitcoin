@@ -1,9 +1,11 @@
 `timescale 1ns / 1ps
 `include "noc/connect_parameters.v"
 
-module processing_element(sys_clk, reset, processor_id, flit, send_credit, credit_in, EN_putFlit, putFlit); //, found_nonce);
-    input sys_clk, reset;
+module processing_element(sys_clk, reset, processor_id, flit, 
+	send_credit, credit_in, EN_putFlit, putFlit, done_out, done_in); //, found_nonce);
+    input sys_clk, reset, done_in;
 	input [4:0] processor_id;
+	output reg done_out;
 	
 	localparam vc_bits = 2;
 	localparam dest_bits = 5;
@@ -26,6 +28,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 	reg found_nonce;
 
     reg [1023:0] buffer;
+	reg [639:0] flit_buffer;
     wire [255:0] hash_out;
     reg [511:0] msg_in;
     reg [1:0] blk_type;
@@ -89,6 +92,8 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 			EN_putFlit <= 1'b0;
 			putFlit <= 0;
 			output_cnt <= 0;
+			flit_buffer <= 0;
+			done_out <= 0;
 		end
 		else
 		begin
@@ -104,7 +109,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 						$display("Ejecting flit %x at receive port %0d", flit, processor_id);
 						send_credit <= 1'b1;
 						credit_in <= 3'b100;
-						buffer[flit_cnt+:64] <= flit[63:0];
+						flit_buffer[flit_cnt+:64] <= flit[63:0];
 						flit_cnt <= (flit_cnt + 64) % 640;
 					end
 					else begin
@@ -121,11 +126,11 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 					//$display("buffer = %h", buffer);
 					if (blk_type == MERKLE_LEAF)
 					begin
-						buffer <= {buffer[511:0],1'b1,{447{1'b0}},64'h200};
+						buffer <= {flit_buffer[511:0],1'b1,{447{1'b0}},64'h200};
 					end
 					else if (blk_type == HEADER)
 					begin
-						buffer <= {buffer[639:32], nonce, 1'b1, {319{1'b0}}, 64'h280};
+						buffer <= {flit_buffer[639:32], nonce, 1'b1, {319{1'b0}}, 64'h280};
 					end
 					state <= INPUT_FIRST_BLOCK;
 				end
@@ -155,6 +160,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 				
 				SECOND_BLOCK_WAITING:
 				begin
+					start <= 1'b0;
 					if (blk_done)
 					begin
 						start <= 1'b1;
@@ -167,15 +173,24 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 				WAIT_HASH:
 				begin
 					start <= 1'b0;
-					if (blk_done & (hash_out[255:228] == 28'd0) & (nonce <= 32'hffff_ffff))
+					
+					if(done_in)
+						state <= DONE;
+					else if (blk_done & (hash_out[255:228] == 28'd0) & (nonce <= 32'hffff_ffff))
 					begin
+						$display("PE: found nonce pid = %d", processor_id);
+						$display("PE: nonce = %h", nonce);
+						$display("PE: CLKS = %h", Clk_cnt);
+						$stop;
 						found_nonce <= 1'b1;
 						state <= SEND_RESULT;
+						done_out <= 1;
 					end
 					else if (blk_done & (hash_out[255:228] != 28'd0) & (nonce < 32'hffff_ffff))
 					begin
-						nonce <= nonce + 5'd5;
-						state <= INIT;
+						nonce <= nonce + `NUM_PE;
+						blk_type <= HEADER;
+						state <= PREPROCESS;
 					end
 					else
 						state <= state;
@@ -184,7 +199,8 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 				SEND_RESULT:
 				begin
 					//if(processor_id == 5'd1)
-						//$stop;
+					//$stop;
+					
 					EN_putFlit <= 1'b1;
 					
 					case (output_cnt)
@@ -235,7 +251,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 			endcase
 		end
 	end
-    SHA256 UUT(.CLK(sys_clk), .nreset(reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
+    SHA256 SHA(.CLK(sys_clk), .nreset(reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
 	
 	always @(posedge sys_clk)
 	begin
