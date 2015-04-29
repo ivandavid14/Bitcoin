@@ -68,7 +68,9 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
     MERKLE_LEAF =  2'b01,
     HEADER =       2'b10;
 
+	/*
 	localparam testheader = 640'h8601a8807d39ef0f73ac5b3aac28c527c89542b8029600809f5fe5ace2ea82b273fcdb297fba14e33f9d2921356b84cf853b629d639e028729d5b40f2b0f6a9649b8965140e8a10adf06070a00000000;
+	*/
 	localparam FOUND_BITCOIN_MSG = 64'h00000001;
 	
 	always @(posedge sys_clk)
@@ -79,7 +81,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 			state <= INIT;
 			blk_iteration <= 1'b0;
 			start <= 1'b0;
-			nonce <= processor_id - 1 + 'ha;  // first processor_id = 1
+			nonce <= processor_id - 1;  // first processor_id = 1
 			found_nonce <= 1'b0;
 			//processor_id <= 0;
 			flit_cnt <= 0;
@@ -172,7 +174,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 					end
 					else if (blk_done & (hash_out[255:228] != 28'd0) & (nonce < 32'hffff_ffff))
 					begin
-						nonce <= nonce + 5'd24;
+						nonce <= nonce + 5'd5;
 						state <= INIT;
 					end
 					else
@@ -233,7 +235,7 @@ module processing_element(sys_clk, reset, processor_id, flit, send_credit, credi
 			endcase
 		end
 	end
-    SHA256 UUT(.CLK(sys_clk), .nreset(~reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
+    SHA256 UUT(.CLK(sys_clk), .nreset(reset), .start(start), .msg(msg_in), .hash(hash_out), .blk_done(blk_done), .blk_type(blk_type));
 	
 	always @(posedge sys_clk)
 	begin

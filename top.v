@@ -5,7 +5,8 @@
 
 module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
 	input sys_clk;
-		input [15:0] SW;
+	//reg sys_clk;
+	input [15:0] SW;
 	input BTNC;
 	clk_wiz_0 cw(sys_clk, hash_clk, slow_clk);
 
@@ -50,8 +51,17 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
   reg [counter_bits - 1 : 0] credit_counter [0:`NUM_USER_RECV_PORTS-1];
   
   // Generate Clock
-  //initial sys_clk = 0;
-  //always #(HalfClkPeriod) sys_clk = ~sys_clk;
+  /*reg Rst_n;
+  initial sys_clk = 0;
+  always #(HalfClkPeriod) sys_clk = ~sys_clk;
+	initial begin
+
+		Rst_n = 0; // perform reset (active low)
+		#(5*ClkPeriod+HalfClkPeriod);
+		Rst_n = 1;
+	end
+	*/
+  
   
   //display vars
   reg [31:0] word_out;
@@ -165,8 +175,8 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
 	
 	generate
 		genvar j;
-		for(j=1; j<=10; j=j+1) begin
-			processing_element pe(.sys_clk(hash_clk), .reset(Rst_n), .flit(flit_out[j])
+		for(j=1; j<=5; j=j+1) begin
+			processing_element pe(.sys_clk(sys_clk), .reset(Rst_n), .flit(flit_out[j])
 								, .send_credit(send_credit[j]), .credit_in(credit_in[j])
 								, .processor_id(j[4:0]) 
 								, .putFlit(flit_in[j]), .EN_putFlit(send_flit[j])
@@ -179,7 +189,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
 
 	// Display code  
 	assign LED[15] = ctrl_done;
-	assign LED[14:8] = {7{Rst_n}};
+	assign LED[14:8] = {7{~Rst_n}};
 	wire [7:0] LED_walk;
 	assign LED[7:0] = LED_walk;
 		
@@ -200,7 +210,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
 			word_out = ctrl_nonce;		
 	end
 	
-	nexys4_display d1(.clk_in(sys_clk), .LED_proc(LED_walk), .CATHODE_proc(CATHODE), .AN_proc(AN), .Word(word_out),
+	nexys4_display d1(.clk_in(slow_clk), .LED_proc(LED_walk), .CATHODE_proc(CATHODE), .AN_proc(AN), .Word(word_out),
 	.BTNC_in(BTNC));
   
   // Instantiate CONNECT network
@@ -239,6 +249,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.EN_send_ports_5_putFlit(send_flit[5])
    ,.EN_send_ports_5_getCredits(1'b1)
    ,.send_ports_5_getCredits(credit_out[5])
+   /*
 
    ,.send_ports_6_putFlit_flit_in(flit_in[6])
    ,.EN_send_ports_6_putFlit(send_flit[6])
@@ -260,6 +271,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.EN_send_ports_9_getCredits(1'b1)
    ,.send_ports_9_getCredits(credit_out[9])
 
+   
    // send ports 10-14
    ,.send_ports_10_putFlit_flit_in(flit_in[10])
    ,.EN_send_ports_10_putFlit(send_flit[10])
@@ -337,7 +349,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.EN_send_ports_24_putFlit(send_flit[24])
    ,.EN_send_ports_24_getCredits(1'b1)
    ,.send_ports_24_getCredits(credit_out[24])
-	  
+	 */
 	  
 	//
 	//receive ports 0-4
@@ -371,7 +383,8 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.recv_ports_5_getFlit(flit_out[5])
    ,.recv_ports_5_putCredits_cr_in(credit_in[5])
    ,.EN_recv_ports_5_putCredits(send_credit[5])
-
+   
+   /*
    ,.EN_recv_ports_6_getFlit(1'b1)
    ,.recv_ports_6_getFlit(flit_out[6])
    ,.recv_ports_6_putCredits_cr_in(credit_in[6])
@@ -469,7 +482,7 @@ module top(sys_clk, BTNC, LED, CATHODE, AN, SW);
    ,.recv_ports_24_getFlit(flit_out[24])
    ,.recv_ports_24_putCredits_cr_in(credit_in[24])
    ,.EN_recv_ports_24_putCredits(send_credit[24])
-   
+   */
    );
 
 
