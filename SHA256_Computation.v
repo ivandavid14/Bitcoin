@@ -25,7 +25,7 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
     HASH        =   7'd0,
     MERKLE_LEAF  =  7'd1,
     HEADER  =   7'd2;
-    
+
     localparam
     INI				= 4'd0,
     UPDATE			= 4'd1,
@@ -34,14 +34,14 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
     IDLE			= 4'd4,
     BEGIN			= 4'd5,
     WAIT_ONE_CLOCK	= 4'd6;
-	
+
 	assign k_addr = round;
-    
+
     always @(posedge CLK, negedge nreset)
     begin: CU
         if (~nreset)
         begin
-            state <= IDLE;         
+            state <= IDLE;
         end
         else
         begin
@@ -58,33 +58,30 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                     f <= H[5];
                     g <= H[6];
                     h <= H[7];
-                    
-                    //for (j=0; j<=15; j=j+1)
-                    //  W[j] <= msg[ 31 + 32*j : 32*j ];
-                    
+
                     W[15] <= msg[ 31 + 32*0 : 32*0 ];
                     W[14] <= msg[ 31 + 32*1 : 32*1 ];
                     W[13] <= msg[ 31 + 32*2 : 32*2 ];
                     W[12] <= msg[ 31 + 32*3 : 32*3 ];
-                    
+
                     W[11] <= msg[ 31 + 32*4 : 32*4 ];
                     W[10] <= msg[ 31 + 32*5 : 32*5 ];
                     W[9] <= msg[ 31 + 32*6 : 32*6 ];
                     W[8] <= msg[ 31 + 32*7 : 32*7 ];
-                    
+
                     W[7] <= msg[ 31 + 32*8 : 32*8 ];
                     W[6] <= msg[ 31 + 32*9 : 32*9 ];
                     W[5] <= msg[ 31 + 32*10 : 32*10 ];
                     W[4] <= msg[ 31 + 32*11 : 32*11 ];
-                    
+
                     W[3] <= msg[ 31 + 32*12 : 32*12 ];
                     W[2] <= msg[ 31 + 32*13 : 32*13 ];
                     W[1] <= msg[ 31 + 32*14 : 32*14 ];
                     W[0] <= msg[ 31 + 32*15 : 32*15 ];
-                    
+
                     state <= UPDATE;
                 end
-				
+
                 UPDATE:
                 begin
                     if (round < 16)
@@ -95,13 +92,13 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                             W[i] <= W[(i+1)];
                         //W[15] <= (Delta1(W[14]) + W[9] + Delta0(W[1]) + W[0]);
                     end
-					
+
 					t1 <= (Sigma1(e) + h) + (Ch(e, f, g) + k);
 					t2 <= Sigma0(a) + Maj(a, b, c);
-					
+
                     state <= COMPRESSION;
                 end
-                
+
                 COMPRESSION:
                 begin
                     if (round >= 16)
@@ -131,21 +128,21 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                     H[4] <= (H[4] + e);
                     H[5] <= (H[5] + f);
                     H[6] <= (H[6] + g);
-                    H[7] <= (H[7] + h); 
-					
+                    H[7] <= (H[7] + h);
+
                     //for (i=0; i<=7; i=i+1)
                     hash[ 31 + 32*0 : 32*0 ] <= (H[7] + h);
                     hash[ 31 + 32*1 : 32*1 ] <= (H[6] + g);
                     hash[ 31 + 32*2 : 32*2 ] <= (H[5] + f);
                     hash[ 31 + 32*3 : 32*3 ] <= (H[4] + e);
-                    
+
                     hash[ 31 + 32*4 : 32*4 ] <= (H[3] + d);
                     hash[ 31 + 32*5 : 32*5 ] <= (H[2] + c);
                     hash[ 31 + 32*6 : 32*6 ] <= (H[1] + b);
                     hash[ 31 + 32*7 : 32*7 ] <= (H[0] + a);
-                    
+
                     blk_done <= 1;
-                    
+
                     if( ((blk_type == MERKLE_LEAF) | (blk_type == HEADER)) & (blknum == 2'b00)) begin
                         state <= WAIT_ONE_CLOCK;
                         blknum <= 2'b01;
@@ -168,27 +165,20 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
                         H[1] <= 32'hbb67ae85;
                         H[2] <= 32'h3c6ef372;
                         H[3] <= 32'ha54ff53a;
-                        H[4] <= 32'h510e527f; 
-                        H[5] <= 32'h9b05688c;      
+                        H[4] <= 32'h510e527f;
+                        H[5] <= 32'h9b05688c;
                         H[6] <= 32'h1f83d9ab;
                         H[7] <= 32'h5be0cd19;
                         round <= 0;
                         blknum <= 2'b00;
                     end
                 end
+
+				default:
+					state <= IDLE;
         endcase
         end
     end
-
-	/*
-	function [31:0] rotate (input [31:0] data, input [4:0] shift);
-        reg [63:0] temp;
-        begin
-          temp = {data, data} >> shift;
-          rotate = temp[31:0];
-        end
-    endfunction
-	*/
 
     function [31 : 0] Ch;
         input [31 : 0] x,y,z;
@@ -225,7 +215,7 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
         Delta1 = {x[16:0], x[31:17]} ^ {x[18:0], x[31:19]} ^ (x >> 10);
 		//Delta1 = rotate(x, 17) ^ rotate(x, 19) ^ (x >> 10);
     endfunction
-	
+
 	/*
     function [31 : 0] T1;
         input [31 : 0] e, f, g, h, k, w;
@@ -237,5 +227,4 @@ module SHA256(CLK, nreset, start, msg, blk_type, hash, blk_done);
         T2 = (Sigma0(a) + Maj(a, b, c));
     endfunction
 	*/
-
 endmodule

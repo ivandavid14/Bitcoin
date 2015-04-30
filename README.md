@@ -21,3 +21,8 @@ Minimize States:
 Hash rate = 78233580/60.9 sec = 1.28 Mhash/s
 Total on-chip power = 0.27W
 
+8 Processing elements using NOC:
+1,294,114,060 clocks / 100MHz = 12.94 sec
+Hash rate = 78233580/12.94 sec = 6.046 Mhash/s
+Total on-chip power = 0.705W
+
