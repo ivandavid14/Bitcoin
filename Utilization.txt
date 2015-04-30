@@ -1,0 +1,8 @@
+Resource		Utilization	Available	Utilization %
+FF			48231		126800		38.04
+LUT			60736		63400		95.80
+Memory LUT	4732			19000		24.91
+I/O			36			210			17.14
+BUFG			3			32			9.38
+PLL			1			6			16.67
+
